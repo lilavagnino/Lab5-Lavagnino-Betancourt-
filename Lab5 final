@@ -58,6 +58,22 @@ void showdisplay2(int number2) {
 }
 }
 
+void setupAnalog(void);
+
+//Para que el botón envíe los datos al datafruit
+struct Boton1{ 
+  const uint8_t boton_Reset;
+  bool pressed;
+  bool lastState;
+};
+Boton1 reset = {32, false, false};
+
+//variables de handle interrupcion
+void IRAM_ATTR handle_reset(){
+  portENTER_CRITICAL_ISR(&mux);
+  reset.pressed = true;
+  portEXIT_CRITICAL_ISR(&mux);
+}
 
 void setup() {
   // Inicia la conexión serial
@@ -121,6 +137,5 @@ void loop() {
   // Añadir un retraso de 3 segundos para cumplir con las limitaciones de Adafruit IO
   delay(3000);
 }
-
 
 
