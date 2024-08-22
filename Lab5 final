@@ -138,4 +138,10 @@ void loop() {
   delay(3000);
 }
 
+void setupAnalog(void){
+  analogSetWidth(12);
+  analogSetAttenuation(ADC_11db);
+
+}
+
 
